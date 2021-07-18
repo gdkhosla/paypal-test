@@ -22,7 +22,7 @@ public class ApplicationExceptionHandlerAdvice extends ResponseEntityExceptionHa
     @ExceptionHandler(Exception.class)
     @ResponseBody
     public ResponseEntity<ErrorResponse> handleGenericExceptions(final Exception ex) {
-    	ex.printStackTrace();        ErrorResponse response = ErrorResponse.builder()
+    	ErrorResponse response = ErrorResponse.builder()
         		.exception(ex.getMessage())
         		.statusCode(HttpStatus.INTERNAL_SERVER_ERROR)
         		.build();

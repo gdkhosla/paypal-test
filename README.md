@@ -34,3 +34,84 @@ We would like you to enhance the existing project and see you complete the follo
 
 ## Assignment submission
 Thank you very much for your time to take this test. Please upload this complete solution in Github and send us the link to `bfs-sor-interview@paypal.com`.
+
+## Submitted assignment information
+- A new resource is created - `address.json` which is referenced inside `booking.json`. In future, if there are more fields to be added to address, only Address resource would be impacted and not the Booking entity.
+- Create and Get All bookings operations are implemented.
+  Create booking - 
+  POST http://localhost:8080/v1/bfs/booking
+  Response Codes : 
+  Successful response code - 201 Accepted
+  When there is duplicate booking - 400 BAD REQUEST with appropriate message
+  When there is an overlapped booking - 400 BAD REQUEST with appropriate message
+  When any of the required field is not provided - 400 BAD REQUEST with appropriate message
+  Sample request body - 
+    {
+    "first_name":"Gurudayal",
+    "last_name" : "Khosla",
+    "date_of_birth": 512658610000,
+    "checkin" : 1626527415,
+    "checkout" : 1626527430,
+    "total_price" : 21.0,
+    "deposit" : 10.50,
+    "address" : {
+        "line1" : "line1",
+        "city" : "Bangalore",
+        "state" : "Karnataka",
+        "country" : "India",
+        "zip_code" : "560100"
+    }
+  }
+  Sample response body -
+  {
+    "id":1,
+    "first_name":"Gurudayal",
+    "last_name" : "Khosla",
+    "date_of_birth": 512658610000,
+    "checkin" : 1626527415,
+    "checkout" : 1626527430,
+    "total_price" : 21.0,
+    "deposit" : 10.50,
+    "address" : {
+        "line1" : "line1",
+        "city" : "Bangalore",
+        "state" : "Karnataka",
+        "country" : "India",
+        "zip_code" : "560100"
+    }
+  }
+  
+  Get booking -
+  GET http://localhost:8080/v1/bfs/booking
+  Response Codes : 
+  Getting bookings successfully - 200 OK
+  No content found - 204 No Content
+  Sample response body - Array of booking json objects
+  [
+    {
+        "id": 1,
+        "first_name": "Gurudayal",
+        "last_name": "Khosla",
+        "date_of_birth": 512658610000,
+        "checkin": 1626527415,
+        "checkout": 1626527430,
+        "total_price": 21.0,
+        "deposit": 10.5,
+        "address": {
+            "line1": "line1",
+            "city": "Bangalore",
+            "state": "Karnataka",
+            "country": "India",
+            "zip_code": "560100"
+        }
+    }
+  ]
+  
+- Total 16 major junit tests are added inside bookingservFunctionalTests module.
+- Validations are implemented for required fields and duplicate bookings.
+- Duplicate and overlapped bookings are not allowed
+- i18n support is added inside com.paypal.bfs.test.bookingserv.i18n.MessageUtil. For messages in different locales, need to use Accept-Language header and message properties files for different locales.
+- Controller adviser is implemented to handle the error messages at application level- com.paypal.bfs.test.bookingserv.controller.adviser.ApplicationExceptionHandlerAdvice
+  
+  
+  
